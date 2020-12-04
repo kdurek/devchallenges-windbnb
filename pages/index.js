@@ -33,13 +33,10 @@ export default function Home() {
     new Set(stays.map((a) => `${a.city}, ${a.country}`))
   )
 
-  console.log("openNav", openNav)
-  console.log("openGuest", openGuest)
-
   return (
     <>
       {openNav && (
-        <div className="absolute w-screen h-screen bg-white z-10 shadow-md rounded-2xl">
+        <div className="fixed w-screen h-5/6 bg-white z-10 shadow-md rounded-2xl">
           <div className="flex flex-col w-11/12 mx-auto gap-4 font-mulish">
             <div className="flex justify-between items-center">
               <p className="font-bold text-xs">Edit your search</p>
@@ -48,8 +45,8 @@ export default function Home() {
               </button>
             </div>
             <div>
-              <div className="flex flex-col justify-center rounded-xl shadow-md text-sm border border-gray-light">
-                <div className="border-b-2 border-gray-light pl-4 py-2">
+              <div className="flex flex-col justify-center rounded-xl shadow-md text-sm border border-gray-light divide-y divide-gray-light">
+                <div className="pl-4 py-2">
                   <p className="text-gray-darkest text-xs font-extrabold pt-1">
                     Location
                   </p>
@@ -69,6 +66,8 @@ export default function Home() {
                           setOpenGuest(false)
                           setCity("")
                           setCountry("")
+                          setGuestAdult(0)
+                          setGuestChild(0)
                         }}
                       >
                         <span className="align-middle material-icons transform">
@@ -89,7 +88,11 @@ export default function Home() {
                         : "text-gray-darkest"
                     } pl-4 text-sm pb-1`}
                   >
-                    {guestTotal === 0 ? "Add guests" : guestTotal}
+                    {guestTotal !== 0
+                      ? guestTotal > 1
+                        ? `${guestTotal} guests`
+                        : `${guestTotal} guest`
+                      : "Add guests"}
                   </p>
                 </div>
               </div>
@@ -180,7 +183,7 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div className="w-11/12 mx-auto my-4 flex flex-col gap-8">
+      <div className="w-11/12 mx-auto flex flex-col gap-8">
         <Head>
           <title>Windbnb</title>
           <link rel="icon" href="/triangleLogo.png" />
@@ -196,10 +199,16 @@ export default function Home() {
         </Head>
 
         <nav className="flex flex-col gap-8">
-          <img className="self-start" src="/logo.png" alt="logo" />
+          <img className="pt-4 self-start" src="/logo.png" alt="logo" />
           <div className="font-mulish flex items-center justify-evenly mx-8 rounded-xl shadow-md h-12 text-sm border border-gray-lightest">
-            <p className="text-gray-darkest">Helsinki, Finland</p>
-            <p className="text-gray-lightest">Add guests</p>
+            <p className="text-gray-darkest">{search ? search : "Search"}</p>
+            <p className="text-gray-lightest">
+              {guestTotal !== 0
+                ? guestTotal > 1
+                  ? `${guestTotal} guests`
+                  : `${guestTotal} guest`
+                : "Add guests"}
+            </p>
             <button onClick={() => setOpenNav(!openNav)}>
               <span className="text-red-light align-middle material-icons">
                 search
@@ -210,7 +219,9 @@ export default function Home() {
 
         <main className="flex flex-col gap-8">
           <div className="flex justify-between font-mont">
-            <h1 className="font-bold text-lg">Stays in Finland</h1>
+            <h1 className="font-bold text-lg">
+              {country ? `Stays in ${country}` : "All stays"}
+            </h1>
             <p className="font-medium text-sm">
               {`${Object.keys(filteredStays).length} ${
                 Object.keys(filteredStays).length > 1 ? "stays" : "stay"
@@ -225,7 +236,7 @@ export default function Home() {
         </main>
 
         <footer className="self-center">
-          <p className="font-mont text-gray-light text-sm font-semibold">
+          <p className="pb-4 font-mont text-gray-light text-sm font-semibold">
             <a href="https://github.com/durashere">durashere</a> @{" "}
             <a href="https://devchallenges.io">DevChallenges.io</a>
           </p>
