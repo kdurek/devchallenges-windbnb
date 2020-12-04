@@ -9,23 +9,23 @@ export default function Card({ stay }) {
       <div className="flex justify-between ">
         <div className="flex items-center gap-2">
           {stay.superHost && (
-            <p className="text-gray-600 font-bold uppercase border border-gray-600 rounded-xl px-2">
+            <p className="text-gray-darker font-bold uppercase border border-gray-darker rounded-xl px-2">
               Super host
             </p>
           )}
-          <p className="text-gray-500 font-medium text-xs">
+          <p className="text-gray-normal font-medium text-xs">
             {stay.type}
             {stay.beds && ` . ${stay.beds} ${stay.beds > 1 ? "beds" : "bed"}`}
           </p>
         </div>
         <div className="flex items-center">
-          <span className="text-red-500 transform scale-75 material-icons">
+          <span className="text-red-light transform scale-75 material-icons">
             star_rate
           </span>
-          <p className="text-gray-600 font-medium text-xs">{stay.rating}</p>
+          <p className="text-gray-darker font-medium text-xs">{stay.rating}</p>
         </div>
       </div>
-      <h2 className="text-gray-800 font-semibold text-sm">{stay.title}</h2>
+      <h2 className="text-gray-darkest font-semibold text-sm">{stay.title}</h2>
     </div>
   )
 }
