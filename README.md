@@ -43,7 +43,7 @@
 - [x] I can see a list of properties
 - [x] I can see property card with a name, rating, apartment type, and super host
 - [x] I can open filter drawer
-- [ ] I can filter properties by location and number of guests
+- [x] I can filter properties by location and number of guests
 - [x] I can see the number of filtered items
 - [x] I can see pages following given designs
 

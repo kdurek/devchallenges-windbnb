@@ -2,6 +2,9 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    flex: {
+      33: "0 0 31.5%",
+    },
     fontFamily: {
       mont: ["Montserrat", "sans-serif"],
       mulish: ["Mulish", "sans-serif"],

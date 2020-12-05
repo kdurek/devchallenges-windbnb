@@ -34,18 +34,18 @@ export default function Home() {
   )
 
   return (
-    <>
+    <div className="text-18px">
       {openNav && (
         <div className="fixed w-screen h-5/6 bg-white z-10 shadow-md rounded-2xl">
-          <div className="flex flex-col w-11/12 mx-auto gap-4 font-mulish">
+          <div className="flex flex-col w-11/12 mx-auto gap-4 font-mulis">
             <div className="flex justify-between items-center">
               <p className="font-bold text-xs">Edit your search</p>
               <button onClick={() => setOpenNav(!openNav)}>
                 <span className="align-middle material-icons">close</span>
               </button>
             </div>
-            <div>
-              <div className="flex flex-col justify-center rounded-xl shadow-md text-sm border border-gray-light divide-y divide-gray-light">
+            <div className="xl:flex xl:justify-center">
+              <div className="flex flex-col justify-center rounded-xl shadow-md text-sm border border-gray-light divide-y divide-gray-light xl:divide-y-0 xl:flex-row xl:justify-around xl:w-2/4">
                 <div className="pl-4 py-2">
                   <p className="text-gray-darkest text-xs font-extrabold pt-1">
                     Location
@@ -97,7 +97,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-11/12 mx-auto gap-4">
+            <div className="flex flex-col w-11/12 mx-auto gap-4 xl:items-center">
               {!openGuest ? (
                 uniqueLocations
                   .filter((stay) =>
@@ -171,7 +171,7 @@ export default function Home() {
                     </div>
                   </div>
                   <button
-                    className="text-white bg-red-light flex items-center justify-center gap-2 w-2/4 h-12 self-center rounded-2xl"
+                    className="text-white bg-red-light flex items-center justify-center gap-2 w-2/4 h-12 self-center rounded-2xl xl:w-11/12 mr-4"
                     onClick={() => setOpenNav(!openNav)}
                   >
                     <span className="align-middle material-icons">search</span>
@@ -183,7 +183,8 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div className="w-11/12 mx-auto flex flex-col gap-8">
+
+      <div className="w-11/12 mx-auto flex flex-col gap-8 xl:w-10/12">
         <Head>
           <title>Windbnb</title>
           <link rel="icon" href="/triangleLogo.png" />
@@ -198,9 +199,13 @@ export default function Home() {
           />
         </Head>
 
-        <nav className="flex flex-col gap-8">
-          <img className="pt-4 self-start" src="/logo.png" alt="logo" />
-          <div className="font-mulish flex items-center justify-evenly mx-8 rounded-xl shadow-md h-12 text-sm border border-gray-lightest">
+        <nav className="flex flex-col gap-8 xl:flex-row xl:justify-between">
+          <img
+            className="mt-4 self-start xl:mt-10"
+            src="/logo.png"
+            alt="logo"
+          />
+          <div className="font-mulish flex items-center justify-evenly mx-8 rounded-xl shadow-md h-12 text-sm border border-gray-lightest xl:mx-0 xl:mt-8 xl:w-80">
             <p className="text-gray-darkest">{search ? search : "Search"}</p>
             <p className="text-gray-lightest">
               {guestTotal !== 0
@@ -219,7 +224,7 @@ export default function Home() {
 
         <main className="flex flex-col gap-8">
           <div className="flex justify-between font-mont">
-            <h1 className="font-bold text-lg">
+            <h1 className="font-bold text-lg xl:text-2xl">
               {country ? `Stays in ${country}` : "All stays"}
             </h1>
             <p className="font-medium text-sm">
@@ -228,11 +233,13 @@ export default function Home() {
               }`}
             </p>
           </div>
-          {city === "" || country === ""
-            ? stays.map((stay) => <Card key={stay.photo} stay={stay} />)
-            : filteredStays.map((stay) => (
-                <Card key={stay.photo} stay={stay} />
-              ))}
+          <div className="flex flex-col gap-8 items-center xl:flex-row xl:flex-wrap ">
+            {city === "" || country === ""
+              ? stays.map((stay) => <Card key={stay.photo} stay={stay} />)
+              : filteredStays.map((stay) => (
+                  <Card key={stay.photo} stay={stay} />
+                ))}
+          </div>
         </main>
 
         <footer className="self-center">
@@ -242,25 +249,6 @@ export default function Home() {
           </p>
         </footer>
       </div>
-    </>
+    </div>
   )
-}
-
-{
-  /* {stays
-                .filter(
-                  (stay) =>
-                    stay.city.toLowerCase().includes(filter.toLowerCase()) ||
-                    stay.country.toLowerCase().includes(filter.toLowerCase())
-                )
-                .map((stay) => (
-                  <button
-                    value={`${stay.city}, s`}
-                    onClick={(e) => setFilter(e.target.value)}
-                    className="text-sm flex items-center gap-1 text-gray-darker focus:outline-none"
-                  >
-                    <span class="material-icons">place</span>
-                    {stay.city}, {stay.country}
-                  </button>
-                ))} */
 }
